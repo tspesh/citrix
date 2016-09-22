@@ -88,14 +88,19 @@ class Consumer extends EntityAbstract implements EntityAware
   {
     $data = $this->getData();
     
-    $this->firstName = $data['firstName'];
-    $this->lastName = $data['lastName'];
-    $this->email = $data['email'];
-    
+
+    if (isset($data['firstName'])) {
+      $this->firstName = $data['firstName'];
+    }
+    if (isset($data['lastName'])) {
+      $this->lastName = $data['lastName'];
+    }
+    if (isset($data['email'])) {
+      $this->email = $data['email'];
+    }
     if (isset($data['registrantKey'])) {
       $this->id = $data['registrantKey'];
     }
-    
     if (isset($data['status'])) {
       $this->status = $data['status'];
     }
