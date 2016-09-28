@@ -46,6 +46,13 @@ abstract class ServiceAbstract
    * @var String
    */
   private $httpMethod = 'POST';
+  
+  /**
+   * Custom headers
+   * 
+   * @var array
+   */
+  private $headers = array();
 
   /**
    * Send API request, but pass the $oauthToken first.
@@ -71,12 +78,20 @@ abstract class ServiceAbstract
       $url = $url . '?' . $query;
     }
     
+    $headers = array();
     if (! is_null($oauthToken)) {
       $headers = array(
         'Content-Type: application/json',
         'Accept: application/json',
         'Authorization: OAuth oauth_token=' . $oauthToken
       );
+    }
+    // add custom headers
+    foreach ($this->headers as $name => $value) {
+      $headers[] = $name.': '.$value;
+    }
+    
+    if (count($headers) > 0) {  
       curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     }
     
@@ -250,6 +265,17 @@ abstract class ServiceAbstract
   {
     $this->httpMethod = $httpMethod;
     
+    return $this;
+  }
+  
+  /**
+   * Add a header
+   * 
+   * @param string $name
+   * @param string $value
+   */
+  public function addHeader($name, $value) {
+    $this->headers[$name] = $value;
     return $this;
   }
 }
