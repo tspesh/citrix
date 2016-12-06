@@ -182,7 +182,7 @@ class GoToWebinar extends ServiceAbstract implements CitrixApiAware
    * @return \Citrix\GoToWebinar
    */
   public function register($webinarKey, $registrantData){
-
+    
     $url = 'https://api.citrixonline.com/G2W/rest/organizers/' . $this->getClient()->getOrganizerKey() . '/webinars/' . $webinarKey . '/registrants';
     $this->setHttpMethod('POST')
         ->setUrl($url)

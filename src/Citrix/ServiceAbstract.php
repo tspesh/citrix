@@ -78,15 +78,16 @@ abstract class ServiceAbstract
       $url = $url . '?' . $query;
     }
     
-    $headers = array();
-    if (! is_null($oauthToken)) {
-      $headers = array(
-        'Content-Type: application/json',
-        'Accept: application/json',
-        'Authorization: OAuth oauth_token=' . $oauthToken
-      );
-    }
     // add custom headers
+    if (!is_null($oauthToken)) {
+      $this->headers['Content-Type'] = 'application/json';
+      $this->headers['Authorization'] = 'OAuth oauth_token=' . $oauthToken;
+      if (!isset($this->headers['Accept'])) {
+        $this->headers['Accept'] = 'application/json';
+      }
+    }
+    
+    $headers = array();
     foreach ($this->headers as $name => $value) {
       $headers[] = $name.': '.$value;
     }
