@@ -1,10 +1,10 @@
-Citrix API - PHP wrapper around GoToWebinar APIs - 2015
+Citrix API - PHP wrapper around GoToWebinar APIs
 ======
 
 Install via Composer
 --
 
-`require "teodortalov/citrix: *"`
+`require "tspesh/citrix: *"`
 
 Authenticate and Get Going in 15 seconds
 --
